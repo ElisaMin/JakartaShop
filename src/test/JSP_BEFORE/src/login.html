@@ -1,13 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-cn">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap-x.css">
     <title>登入</title>
 </head>
 <body>
-    <div class="card">
-        
+    <div class="container p-5">
+        <div class="h1 mt-5 mb-2">登入</div>
+        <div class="card ">
+            <div class="card-body">
+                <div class="mb-3">
+                  <label for="username" class="form-label">用户名</label>
+                  <input type="text" class="form-control" id="username" placeholder="name@example.com">
+                </div>
+                <div class="mb-3">
+                  <label for="password" class="form-label">密码</label>
+                  <input type="password" name="password" id="password" class="form-control">
+                </div>
+                <div class="mb-3 row justify-content-between">
+                    <div class="col-3">
+                        <button type="button" class="btn btn-outline-primary">登入</button>
+                        <button type="button" class="btn btn-outline-secondary">注册</button>
+                    </div>
+                    <div class="col-2">
+                        <div class="btn btn-link">忘记密码?</div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 </html>
