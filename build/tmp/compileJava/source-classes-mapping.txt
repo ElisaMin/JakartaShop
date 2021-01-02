@@ -1,6 +1,0 @@
-me/heizi/jsp/shopShit/HelloServlet.java
- me.heizi.jsp.shopShit.HelloServlet
-me/heizi/jsp/shopShit/HelloApplication.java
- me.heizi.jsp.shopShit.HelloApplication
-me/heizi/jsp/shopShit/HelloResource.java
- me.heizi.jsp.shopShit.HelloResource
