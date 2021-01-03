@@ -13,6 +13,7 @@ repositories {
 
 ext {
     junitVersion = '5.7.0'
+    weldVersion = '4.0.0.Final'
 }
 
 sourceCompatibility = 1.8
@@ -28,7 +29,9 @@ dependencies {
     compileOnly('jakarta.mvc:jakarta.mvc-api:+')
     compileOnly('org.eclipse.krazo:krazo-core:2.0.0')
     //cdi
-    implementation('org.jboss.weld.se:weld-se-core:+')
+//    implementation "org.jboss.weld:weld-core-impl:${weldVersion}"
+//    implementation "org.jboss.weld.servlet:weld-servlet-core:${weldVersion}"
+//    implementation "org.jboss.weld.se:weld-se-core:${weldVersion}"
     //kotlin
     implementation('org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.4.21')
     //testing

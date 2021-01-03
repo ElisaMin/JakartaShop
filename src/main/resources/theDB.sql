@@ -8,7 +8,8 @@ create table users (
     image text,
     credit int default 0 ,
     reg_time datetime,
-    isAdmin int default 0
+    isAdmin int default 0,
+    last_login datetime
 );
 -- 商品类型
 create table product_type (
@@ -29,4 +30,27 @@ create table products (
     isHit int default 0,
     type_id int ,
     foreign key(type_id) references  product_type(id)
+);
+
+-- 购物车
+create table pre_orders(
+    id int primary key autoincrement ,
+    user_id int not null ,
+    product_id int not null ,
+    counts  int default 0,
+    foreign key(product_id) references products(id),
+    foreign key (user_id) references users(id)
+);
+
+-- 订单表
+create table orders(
+    id int primary key autoincrement ,
+    user_id int not null ,
+    product_id int not null ,
+    generate_time datetime not null,
+    amount int not null default 0, -- 数量
+    comment text, -- 评论
+    comment_generate_time datetime,
+    foreign key (user_id) references users(id),
+    foreign key (product_id) references products(id)
 );
