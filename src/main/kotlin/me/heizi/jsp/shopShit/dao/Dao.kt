@@ -9,6 +9,7 @@ interface Dao {
     fun getAllProducts():List<Product>
     fun findProductById(id:String):Product
     fun addToCart(productID: String,userId:String)
+    fun verifyUser(username:String,password:String):Boolean
 
 
 }

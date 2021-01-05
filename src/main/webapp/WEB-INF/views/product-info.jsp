@@ -1,3 +1,5 @@
+<%--@elvariable id="p" type="me.heizi.jsp.shopShit.dao.entities.Product"--%>
+<%--@elvariable id="status" type="Int"--%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
@@ -39,7 +41,7 @@
     <div class="row p-0">
         <div class="col-7">
             <div class="row mt-2">
-                <img src="img/${p.image}" class="w-100">
+                <img src="img/${p.image}" class="w-100" alt="商品详细图">
             </div>
             <div class="row mt-2">
                 <h6 class="text-secondary">商品描述:</h6>

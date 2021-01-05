@@ -1,7 +1,7 @@
 package me.heizi.jsp.shopShit.dao.entities
 
 import jakarta.persistence.*
-import jdk.nashorn.internal.ir.annotations.Ignore
+
 
 /**
  * User
@@ -41,10 +41,12 @@ open class User {
 
     @Column(name = "reg_time")
     open lateinit var registerTime:String
+
+
+    val isAdmin get() = _isAdmin==1
+    var isMale
+        get() = _isAdmin==1
+        set(value) {
+            gender = if (value) 1 else 0
+        }
 }
-val User.isAdmin get() = _isAdmin==1
-var User.isMale
-    get() = _isAdmin==1
-    set(value) {
-        gender = if (value) 1 else 0
-    }
