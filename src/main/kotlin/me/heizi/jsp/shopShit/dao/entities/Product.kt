@@ -21,4 +21,7 @@ open class Product {
 
     @Column(name="type_id")
     open var typeId = 0
+
+    @Transient
+    var typeName:String?=null
 }
