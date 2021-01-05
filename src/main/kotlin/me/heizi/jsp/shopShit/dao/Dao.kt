@@ -7,8 +7,8 @@ interface Dao {
 
 
     fun getAllProducts():List<Product>
-    fun findProductById(id:String):Product
-    fun addToCart(productID: String,userId:String)
+    fun findProductById(id:String):Product?
+    fun addToCart(productID: String,userID:String)
     fun verifyUser(username:String,password:String):Boolean
 
 
