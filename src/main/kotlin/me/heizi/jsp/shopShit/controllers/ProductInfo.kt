@@ -10,21 +10,22 @@ import jakarta.validation.Valid
 import jakarta.validation.constraints.NotNull
 import jakarta.ws.rs.*
 import jakarta.ws.rs.core.Response
+import me.heizi.jsp.shopShit.annotation.Open
 import me.heizi.jsp.shopShit.dao.Dao
 
 @Path("/info/{id}")
 @Controller
-open class ProductInfo {
+@Open class ProductInfo {
 
-    open class Form{
+    class Form{
         @MvcBinding
         @NotNull
         @FormParam("id")
-        open lateinit var id:String
+        lateinit var id:String
         @MvcBinding
         @NotNull
         @FormParam("user_id")
-        open lateinit var userId:String
+        lateinit var userId:String
 
     }
 

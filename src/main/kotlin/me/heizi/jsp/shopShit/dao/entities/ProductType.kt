@@ -1,12 +1,13 @@
 package me.heizi.jsp.shopShit.dao.entities
 
 import jakarta.persistence.*
+import me.heizi.jsp.shopShit.annotation.Open
 
 @Entity(name = "productType")
 @Table(name = "product_type")
-open class ProductType {
+@Open data class ProductType (
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id = 0
+    var id: Int = 0,
     @Column
     var name:String? = null
-}
+)

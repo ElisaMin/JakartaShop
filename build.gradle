@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'war'
     id 'org.jetbrains.kotlin.jvm' version '1.4.21'
+    id "org.jetbrains.kotlin.plugin.allopen" version "1.4.21"
 }
 
 group 'me.heizi.jsp'
@@ -52,6 +53,17 @@ compileTestKotlin {
         jvmTarget = "1.8"
     }
 }
+allOpen {
+    annotation("me.heizi.jsp.shopShit.annotation.Open")
+}
+task copyDatabase(type:Copy) {
+    from('src/main/resources/theDB.db')
+    into('F:\\services\\wildfly-preview-22.0.0.Beta1\\bin\\src\\main\\resources\\')
+}
+
+build.dependsOn(copyDatabase)
+
 test {
     useJUnitPlatform()
 }
+

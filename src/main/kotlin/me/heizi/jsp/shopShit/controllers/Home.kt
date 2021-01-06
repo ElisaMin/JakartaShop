@@ -6,12 +6,13 @@ import jakarta.mvc.Models
 import jakarta.mvc.View
 import jakarta.ws.rs.GET
 import jakarta.ws.rs.Path
+import me.heizi.jsp.shopShit.annotation.Open
 import me.heizi.jsp.shopShit.dao.Dao
 
 
 @Path("/")
 @Controller
-open class Home {
+@Open class Home {
 
     @Inject
     private lateinit var models: Models

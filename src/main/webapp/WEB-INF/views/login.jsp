@@ -1,5 +1,4 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="v" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: Heizi
@@ -13,7 +12,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../css/bootstrap.min.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/bootstrap-x.css">
     <title>登入</title>
@@ -42,13 +40,26 @@
             </div>
         </form> </div>
     </div>
+
     <c:choose>
         <%--@elvariable id="status" type="Int"--%>
-        <c:when test="${status == 1}">
+        <c:when test="${status == -1}">
             <div class="row"> 
                 <div class="row mb-3" >
                     <div class="alert alert-danger alert-dismissible fade show" role="alert">
                         用户名或密码错误
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                </div>
+            </div>
+        </c:when>
+        <c:when test="${status == 1}"><%--@elvariable id="id" type="String"--%>
+            <div class="row">
+                <div class="row mb-3" >
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">成功!
+                        <script>
+                            document.cookie = "id=${id};"
+                        </script>
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 </div>

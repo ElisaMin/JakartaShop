@@ -10,15 +10,16 @@ import jakarta.validation.Valid
 import jakarta.validation.constraints.NotNull
 import jakarta.ws.rs.*
 import jakarta.ws.rs.core.Response
+import me.heizi.jsp.shopShit.annotation.Open
 import me.heizi.jsp.shopShit.dao.Dao
 
-@Path("/login")
+@Path("login")
 @Controller
-open class Login {
+@Open class Login {
 
     @GET
     @View("login.jsp")
-    open fun justResponse() {}
+    fun justResponse() {}
 
     class Form {
         @MvcBinding
@@ -36,17 +37,18 @@ open class Login {
     @Inject private lateinit var bindingResult:BindingResult
 
     @POST
-    open fun verify(@Valid @BeanParam form:Form):Response = when {
+    fun verify(@Valid @BeanParam form:Form):Response =  when {
         bindingResult.isFailed ->
             Response.status(Response.Status.BAD_REQUEST).build()
 
         dao.verifyUser(form.name,form.pswd) -> {
-            TODO("验证成功")
-//            Response.ok("redirect:/").build()
+            model.put("status",1)
+            model.put("id",dao.getIdByUsername(form.name))
+            Response.ok("login.jsp").build()
         }
         else -> {
-            model.put("status","")
-            Response.ok().build()
+            model.put("status",-1)
+            Response.status(Response.Status.FORBIDDEN).entity("login.jsp").build()
         }
     }
 }

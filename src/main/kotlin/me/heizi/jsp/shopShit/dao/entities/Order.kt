@@ -1,21 +1,19 @@
 package me.heizi.jsp.shopShit.dao.entities
 
 import jakarta.persistence.*
+import me.heizi.jsp.shopShit.annotation.Open
 
 @Entity
 @Table(name = "orders")
-open class Order {
-
+@Open data class Order(
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    open var id = 0
-
-    @Column(name="user_id") open var userId =  0
-    @Column(name="product_id") open var productId =  0
-
-    @Column(name = "generate_time") open lateinit var time:String
-
-    @Column open var amount =  0
-    @Column(name = "comment") open lateinit var comment:String
-    @Column(name = "comment_generate_time") open lateinit var timeComment:String
+    var id: Int = 0,
+    @Column(name="user_id") var userId: Int =  0,
+    @Column(name="product_id") var productId: Int =  0,
+    @Column var amount: Int =  0
+) {
+    @Column(name = "generate_time") lateinit var time:String
+    @Column(name = "comment") lateinit var comment:String
+    @Column(name = "comment_generate_time") lateinit var timeComment:String
 
 }

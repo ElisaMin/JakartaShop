@@ -1,7 +1,8 @@
 package me.heizi.jsp.shopShit
 
 import jakarta.ws.rs.ApplicationPath
+import jakarta.ws.rs.core.Application as App
 
 @ApplicationPath("/")
-class Application {
+open class Application: App() {
 }
