@@ -10,16 +10,32 @@ import jakarta.validation.Valid
 import jakarta.validation.constraints.NotNull
 import jakarta.ws.rs.*
 import jakarta.ws.rs.core.Response
+import me.heizi.jsp.shopShit.R
 import me.heizi.jsp.shopShit.annotation.Open
 import me.heizi.jsp.shopShit.dao.Dao
+import me.heizi.jsp.shopShit.dao.PersistenceManager
+import me.heizi.jsp.shopShit.dao.entities.User
 
 @Path("login")
 @Controller
 @Open class Login {
 
+//    companion object {
+//        inline fun blockingUserExist
+//    }
+
     @GET
     @View("login.jsp")
-    fun justResponse() {}
+    fun justResponse(@CookieParam(R.cookie.id) id:String?):Response {
+        //如果用户存在则阻止本次
+        return kotlin.runCatching {
+            PersistenceManager.useWithResult {
+                find(User::class.java,id).id
+                //存在
+                Response.status(Response.Status.BAD_REQUEST).entity("/").build()
+            }
+        }.getOrDefault(Response.ok().build())
+    }
 
     class Form {
         @MvcBinding
@@ -37,7 +53,7 @@ import me.heizi.jsp.shopShit.dao.Dao
     @Inject private lateinit var bindingResult:BindingResult
 
     @POST
-    fun verify(@Valid @BeanParam form:Form):Response =  when {
+    fun verify(@Valid @BeanParam form:Form,):Response =  when {
         bindingResult.isFailed ->
             Response.status(Response.Status.BAD_REQUEST).build()
 

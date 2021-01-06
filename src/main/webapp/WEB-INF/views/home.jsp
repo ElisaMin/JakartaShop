@@ -1,3 +1,11 @@
+<%@ page import="java.util.Arrays" %>
+<%@ page import="java.util.function.Predicate" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="me.heizi.jsp.shopShit.utils.FindCookieKt" %>
+<%@ page import="me.heizi.jsp.shopShit.R" %>
+<%@ page import="jakarta.servlet.http.Cookie" %>
+<%@ page import="jakarta.inject.Inject" %>
+<%@ page import="me.heizi.jsp.shopShit.dao.Dao" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
@@ -47,11 +55,25 @@
                     <a class="nav-link active" aria-current="page" href="#">主页</a>
                 </div>
                 <div class="navbar-nav">
-                    <a href="" class="nav-link">登入</a>
+                    <a href="login" class="nav-link">登入</a>
                 </div>
                 <div class="navbar-nav">
-                    <a href="" class="nav-link">注册</a>
+                    <a href="resign" class="nav-link">注册</a>
                 </div>
+                <%!
+                    @Inject private Dao dao;
+                %>
+                <%
+                    Cookie cookie =  FindCookieKt.findCookie(request.getCookies(), R.cookie.id);
+                    Boolean isAdmin = cookie !=null && dao.isAdmin(cookie.getValue());
+                    cookie = null;
+                %>
+                <c:if test="<%=isAdmin%>">
+                    <div class="navbar-nav">
+                        <a href="manage" class="nav-link">管理</a>
+                    </div>
+                </c:if>
+
             </div>
         </div>
     </nav>

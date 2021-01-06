@@ -3,7 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/src/test/JSP-BEFORE/JSP_BEFORE.iml" filepath="$PROJECT_DIR$/src/test/JSP-BEFORE/JSP_BEFORE.iml" />
-      <module fileurl="file://$PROJECT_DIR$/src/test/JSP_Before/JSP_BEFORES.iml" filepath="$PROJECT_DIR$/src/test/JSP_Before/JSP_BEFORES.iml" />
+      <module fileurl="file://$PROJECT_DIR$/src/JSP_BEFORE/JSP_BEFORES.iml" filepath="$PROJECT_DIR$/src/JSP_BEFORE/JSP_BEFORES.iml" />
     </modules>
   </component>
 </project>

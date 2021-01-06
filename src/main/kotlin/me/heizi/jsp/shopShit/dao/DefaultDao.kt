@@ -1,12 +1,19 @@
 package me.heizi.jsp.shopShit.dao
 
+import jakarta.enterprise.context.ApplicationScoped
+import jakarta.inject.Named
+import jakarta.inject.Singleton
 import me.heizi.jsp.shopShit.dao.entities.PreOrder
 import me.heizi.jsp.shopShit.dao.entities.Product
+import me.heizi.jsp.shopShit.dao.entities.User
 
 
+@Named("dao")
+@Singleton
+@ApplicationScoped
 class DefaultDao:Dao {
     override fun getAllProducts(): List<Product> = PersistenceManager.useWithResult {
-        createQuery("select product from product ",Product::class.java).resultList
+        createQuery("select p from product as p",Product::class.java).resultList
     }
 
 
@@ -36,5 +43,15 @@ class DefaultDao:Dao {
                 .singleResult as Int
 
         }.getOrDefault(-1) == 1
+    }
+
+    override fun isAdmin(id: String): Boolean = PersistenceManager.useWithResult {
+        find(User::class.java,id).isAdmin
+    }
+
+    override fun getIdByUsername(username: String): String = PersistenceManager.useWithResult {
+        createQuery("select u.id from user u where u.name = :user ")
+            .setParameter("user",username)
+            .singleResult as String
     }
 }

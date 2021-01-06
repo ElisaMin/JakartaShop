@@ -10,6 +10,7 @@ interface Dao {
     fun findProductById(id:String):Product?
     fun addToCart(productID: String,userID:String)
     fun verifyUser(username:String,password:String):Boolean
-
+    fun isAdmin(id: String):Boolean
+    fun getIdByUsername(username:String):String
 
 }
