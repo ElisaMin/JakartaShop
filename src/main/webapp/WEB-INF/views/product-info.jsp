@@ -1,6 +1,6 @@
 <%@ page import="me.heizi.jsp.shopShit.utils.FindCookieKt" %>
-<%@ page import="me.heizi.jsp.shopShit.R" %><%--@elvariable id="p" type="me.heizi.jsp.shopShit.dao.entities.Product"--%>
-<%--@elvariable id="status" type="Int"--%>
+<%@ page import="me.heizi.jsp.shopShit.R" %>
+<%--@elvariable id="p" type="me.heizi.jsp.shopShit.dao.entities.Product"--%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
@@ -20,25 +20,14 @@
 </head>
 <body class="bg-light">
 <div class="container-lg mt-5 rounded-3 shadow-lg p-0">
-    <c:choose >
-
-        <c:when test="${status == 1}">
-            <div class="row mb-3" >
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    购物车加入成功
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
+    <c:if test="${isAddedToCart}">
+        <div class="row mb-3" >
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                购物车加入成功
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
-        </c:when>
-        <c:when test="${status=-1}">
-            <div class="row mb-3" >
-                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    请登入!
-                    <button type="button"  data-bs-dismiss="alert" >登入</button>
-                </div>
-            </div>
-        </c:when>
-    </c:choose>
+        </div>
+    </c:if>
     <div class="row p-0">
         <div class="col-7">
             <div class="row mt-2">
@@ -82,15 +71,18 @@
             <div class="row mx-3">
                 ${p.quantity}
             </div>
-            <c:if test='<%=FindCookieKt.findCookie(request.getCookies(), R.cookie.id) != null%>'>
-                <form method="post">
-                    <input type="hidden" name="user_id" value='<%=FindCookieKt.findCookie(request.getCookies(), R.cookie.id)%>' >
-                    <button name="id" value="${p.id}" type="submit" class=" mx-1 mt-5 row w-100 btn btn-outline-primary">加入购物车</button>
-                </form>
-            </c:if>
-            <c:otherwise>
-                <button class="mx-1 mt-5 row w-100 btn btn-outline-primary">登入</button>
-            </c:otherwise>
+
+            <c:choose>
+                <c:when test="${isLogin!=true && isAddedToCart==null }">
+                    <button class="mx-1 mt-5 row w-100 btn btn-outline-primary">登入</button>
+                </c:when>
+                <c:when test="${isLogin || isAddedToCart}">
+                    <form method="post">
+                        <button type="submit" class=" mx-1 mt-5 row w-100 btn btn-outline-primary">加入购物车</button>
+                    </form>
+                </c:when>
+            </c:choose>
+
         </div>
     </div>
 </div>

@@ -11,29 +11,30 @@ import jakarta.validation.constraints.NotNull
 import jakarta.ws.rs.*
 import jakarta.ws.rs.core.NewCookie
 import jakarta.ws.rs.core.Response
+import me.heizi.jsp.shopShit.ApplicationScopeParameterSaver
 import me.heizi.jsp.shopShit.R
 import me.heizi.jsp.shopShit.annotation.Open
 import me.heizi.jsp.shopShit.dao.Dao
-import me.heizi.jsp.shopShit.dao.PersistenceManager
-import me.heizi.jsp.shopShit.dao.entities.User
 
 @Path("login")
 @Controller
 @Open class Login {
 
+    @Inject private lateinit var asps:ApplicationScopeParameterSaver
 
+    /**
+     * Blocking
+     *
+     * @param id
+     * @return
+     */
     @GET
     @View("login.jsp")
-    fun justResponse(@CookieParam(R.cookie.id) id:String?):Response {
-        //如果用户存在则阻止本次
-        return kotlin.runCatching {
-            PersistenceManager.useWithResult {
-                find(User::class.java,id).id
-                //存在
-                Response.status(Response.Status.BAD_REQUEST).entity("/").build()
-            }
-        }.getOrDefault(Response.ok().build())
-    }
+    fun blocking(@CookieParam(R.cookie.id) id:String?):Response =
+        if (asps.isUser(id?.toInt())) {  //如果用户存在则阻止本次
+            Response.status(Response.Status.BAD_REQUEST).entity("/").build()//存在
+    } else Response.ok().build()
+
 
     class Form {
         @MvcBinding
@@ -49,6 +50,7 @@ import me.heizi.jsp.shopShit.dao.entities.User
     @Inject private lateinit var dao:Dao
     @Inject private lateinit var model:Models
     @Inject private lateinit var bindingResult:BindingResult
+
 
     /**
      * Verify 登入验证

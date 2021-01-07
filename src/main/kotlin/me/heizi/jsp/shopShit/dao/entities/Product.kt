@@ -16,10 +16,12 @@ data class Product(
     @Column var info:String? = null,
     @Column(name = "create_time") var createTime:String? = null,
     @Column(name = "isHit") var hit: Int =0,
-    @Column(name="type_id") var typeId: Int = 0
     ) {
 
     @Column(nullable = false) lateinit var name:String
     @Transient
     var typeName:String?=null
+
+    @OneToOne
+    lateinit var type:ProductType
 }
