@@ -54,26 +54,26 @@
                 <div class="navbar-nav">
                     <a class="nav-link active" aria-current="page" href="#">主页</a>
                 </div>
-                <div class="navbar-nav">
-                    <a href="login" class="nav-link">登入</a>
-                </div>
-                <div class="navbar-nav">
-                    <a href="resign" class="nav-link">注册</a>
-                </div>
-                <%!
-                    @Inject private Dao dao;
-                %>
-                <%
-                    Cookie cookie =  FindCookieKt.findCookie(request.getCookies(), R.cookie.id);
-                    Boolean isAdmin = cookie !=null && dao.isAdmin(cookie.getValue());
-                    cookie = null;
-                %>
-                <c:if test="<%=isAdmin%>">
-                    <div class="navbar-nav">
-                        <a href="manage" class="nav-link">管理</a>
-                    </div>
-                </c:if>
-
+                <c:choose>
+                    <c:when test="${isAdmin == null}">
+                        <div class="navbar-nav">
+                            <a href="login" class="nav-link">登入</a>
+                        </div>
+                        <div class="navbar-nav">
+                            <a href="resign" class="nav-link">注册</a>
+                        </div>
+                    </c:when>
+                    <c:otherwise>
+                        <div class="navbar-nav">
+                            <a href="cart" class="nav-link">购物车</a>
+                        </div>
+                        <c:if test="${isAdmin}">
+                            <div class="navbar-nav">
+                                <a href="manage" class="nav-link">管理</a>
+                            </div>
+                        </c:if>
+                    </c:otherwise>
+                </c:choose>
             </div>
         </div>
     </nav>

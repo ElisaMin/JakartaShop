@@ -53,12 +53,12 @@
                 </div>
             </div>
         </c:when>
-        <c:when test="${status == 1}"><%--@elvariable id="id" type="String"--%>
+        <c:when test="${status == 1}">
             <div class="row">
                 <div class="row mb-3" >
                     <div class="alert alert-success alert-dismissible fade show" role="alert">成功!
                         <script>
-                            document.cookie = "id=${id};"
+                            setTimeout(()=>{window.location.href="/"},3000)
                         </script>
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>

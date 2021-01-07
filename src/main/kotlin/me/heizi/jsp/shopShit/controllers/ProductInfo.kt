@@ -40,13 +40,16 @@ import me.heizi.jsp.shopShit.dao.Dao
     }
 
     @POST
-    fun addCart(@Valid @BeanParam form:Form):Response {
+    fun addCart(@PathParam("id") id:String?,@Valid @BeanParam form:Form):Response {
         if (bindingResult.isFailed) {
             models.put("status",-2)
             Response.status(Response.Status.BAD_REQUEST).entity("product-info.jsp").build()
         }
-        dao.addToCart(form.id,form.id)
+
+        dao.addToCart(form.id,form.userId)
+
         models.put("status",1)
+
         return Response.ok("product-info.jsp").build()
     }
 

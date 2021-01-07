@@ -1,4 +1,5 @@
-<%--@elvariable id="p" type="me.heizi.jsp.shopShit.dao.entities.Product"--%>
+<%@ page import="me.heizi.jsp.shopShit.utils.FindCookieKt" %>
+<%@ page import="me.heizi.jsp.shopShit.R" %><%--@elvariable id="p" type="me.heizi.jsp.shopShit.dao.entities.Product"--%>
 <%--@elvariable id="status" type="Int"--%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
@@ -81,9 +82,9 @@
             <div class="row mx-3">
                 ${p.quantity}
             </div>
-            <c:if test="${cookie.get(\"user_id\")!=null}">
+            <c:if test='<%=FindCookieKt.findCookie(request.getCookies(), R.cookie.id) != null%>'>
                 <form method="post">
-                    <input type="hidden" name="user_id" value='${cookie.get("user_id")}' >
+                    <input type="hidden" name="user_id" value='<%=FindCookieKt.findCookie(request.getCookies(), R.cookie.id)%>' >
                     <button name="id" value="${p.id}" type="submit" class=" mx-1 mt-5 row w-100 btn btn-outline-primary">加入购物车</button>
                 </form>
             </c:if>

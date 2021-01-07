@@ -12,8 +12,10 @@ import me.heizi.jsp.shopShit.dao.entities.User
 @Singleton
 @ApplicationScoped
 class DefaultDao:Dao {
-    override fun getAllProducts(): List<Product> = PersistenceManager.useWithResult {
-        createQuery("select p from product as p",Product::class.java).resultList
+
+
+    override fun getHomeShowingProducts(): List<Product> = PersistenceManager.useWithResult {
+        createQuery("select p from product as p ",Product::class.java).resultList
     }
 
 
@@ -45,7 +47,7 @@ class DefaultDao:Dao {
         }.getOrDefault(-1) == 1
     }
 
-    override fun isAdmin(id: String): Boolean = PersistenceManager.useWithResult {
+    override fun isAdmin(id: Int): Boolean = PersistenceManager.useWithResult {
         find(User::class.java,id).isAdmin
     }
 
