@@ -1,7 +1,7 @@
 package me.heizi.jsp.shopShit.dao.entities
 
 import jakarta.persistence.*
-import me.heizi.jsp.shopShit.annotation.Open
+import me.heizi.jsp.shopShit.annotations.Open
 
 @Entity(name = "product")
 @Table(name = "products")
@@ -19,8 +19,6 @@ data class Product(
     ) {
 
     @Column(nullable = false) lateinit var name:String
-    @Transient
-    var typeName:String?=null
 
     @OneToOne
     lateinit var type:ProductType

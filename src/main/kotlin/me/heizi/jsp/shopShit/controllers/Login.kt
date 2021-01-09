@@ -13,7 +13,7 @@ import jakarta.ws.rs.core.NewCookie
 import jakarta.ws.rs.core.Response
 import me.heizi.jsp.shopShit.ApplicationScopeParameterSaver
 import me.heizi.jsp.shopShit.R
-import me.heizi.jsp.shopShit.annotation.Open
+import me.heizi.jsp.shopShit.annotations.Open
 import me.heizi.jsp.shopShit.dao.Dao
 
 @Path("login")

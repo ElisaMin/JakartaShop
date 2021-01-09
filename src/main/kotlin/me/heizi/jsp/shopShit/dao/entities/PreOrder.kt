@@ -1,7 +1,7 @@
 package me.heizi.jsp.shopShit.dao.entities
 
 import jakarta.persistence.*
-import me.heizi.jsp.shopShit.annotation.Open
+import me.heizi.jsp.shopShit.annotations.Open
 
 @Entity(name = "preOrders")
 @Table(name="pre_orders")

@@ -54,7 +54,7 @@ compileTestKotlin {
     }
 }
 allOpen {
-    annotation("me.heizi.jsp.shopShit.annotation.Open")
+    annotation("me.heizi.jsp.shopShit.annotations.Open")
 }
 task copyDatabase(type:Copy) {
     from('src/main/resources/theDB.db')

@@ -4,7 +4,7 @@ import jakarta.ws.rs.GET
 import jakarta.ws.rs.Path
 import jakarta.ws.rs.PathParam
 import jakarta.ws.rs.core.Response
-import me.heizi.jsp.shopShit.annotation.Open
+import me.heizi.jsp.shopShit.annotations.Open
 import org.apache.ibatis.io.Resources
 
 @Path("/js/{resource}")

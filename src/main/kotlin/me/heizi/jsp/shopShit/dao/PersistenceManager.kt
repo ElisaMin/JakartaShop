@@ -1,6 +1,5 @@
 package me.heizi.jsp.shopShit.dao
 
-import jakarta.enterprise.context.ApplicationScoped
 import jakarta.persistence.EntityManager
 import jakarta.persistence.Persistence
 

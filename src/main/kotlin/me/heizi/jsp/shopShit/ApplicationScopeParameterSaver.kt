@@ -1,12 +1,11 @@
 package me.heizi.jsp.shopShit
 
-import jakarta.enterprise.context.ApplicationScoped
 import jakarta.inject.Inject
 import jakarta.inject.Singleton
-import me.heizi.jsp.shopShit.annotation.Open
+import me.heizi.jsp.shopShit.annotations.Open
 import me.heizi.jsp.shopShit.dao.Dao
 
-@ApplicationScoped
+
 @Singleton
 @Open class ApplicationScopeParameterSaver {
 
