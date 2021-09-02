@@ -31,8 +31,8 @@
             </div>
             <div class="mb-3 row justify-content-between">
                 <div class="col-3">
-                    <button type="button" class="btn btn-outline-primary">登入</button>
-                    <button type="submit" class="btn btn-outline-secondary" onclick="window.location.href='resign'">注册</button>
+                    <button type=submit class="btn btn-outline-primary"  >登入</button>
+                    <button type="button" class="btn btn-outline-secondary" onclick="window.location.href='resign'">注册</button>
                 </div>
                 <div class="col-2">
                     <div class="btn btn-link">忘记密码?</div>

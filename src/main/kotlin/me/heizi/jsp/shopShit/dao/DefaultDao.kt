@@ -101,5 +101,9 @@ class DefaultDao:Dao {
     override fun addProduct(product: Product) = useWithCommit{
         persist(product)
     }
+
+    override fun addUser(user: User) = useWithCommit {
+        persist(user)
+    }
     /** */
 }

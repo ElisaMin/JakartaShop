@@ -3,6 +3,7 @@ package me.heizi.jsp.shopShit.dao
 import me.heizi.jsp.shopShit.dao.entities.PreOrder
 import me.heizi.jsp.shopShit.dao.entities.Product
 import me.heizi.jsp.shopShit.dao.entities.ProductType
+import me.heizi.jsp.shopShit.dao.entities.User
 import java.io.InputStream
 import java.io.OutputStream
 
@@ -41,5 +42,7 @@ interface Dao {
     fun getImageByID(id:Int):Image
     /** 添加商品*/
     fun addProduct(product: Product)
+    /** 添加商品*/
+    fun addUser(user: User)
     /** */
 }

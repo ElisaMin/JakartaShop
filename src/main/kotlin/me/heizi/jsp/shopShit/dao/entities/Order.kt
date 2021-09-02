@@ -13,7 +13,6 @@ import me.heizi.jsp.shopShit.annotations.Open
     @Column(name = "generate_time") lateinit var time:String
     @Column(name = "comment") lateinit var comment:String
     @Column(name = "comment_generate_time") lateinit var timeComment:String
-
     @OneToOne
     lateinit var user: User
     @OneToOne

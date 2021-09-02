@@ -22,7 +22,8 @@ targetCompatibility = 1.8
 
 dependencies {
     //database driver
-    implementation 'org.xerial:sqlite-jdbc:+'
+//    implementation 'org.xerial:sqlite-jdbc:+'
+    implementation "com.h2database:h2:1.4.200"
     //jersey
     implementation('org.glassfish.jersey.containers:jersey-container-servlet:3.0.0')
     implementation('org.glassfish.jersey.media:jersey-media-json-jackson:3.0.0')
@@ -56,12 +57,7 @@ compileTestKotlin {
 allOpen {
     annotation("me.heizi.jsp.shopShit.annotations.Open")
 }
-task copyDatabase(type:Copy) {
-    from('src/main/resources/theDB.db')
-    into('F:\\services\\wildfly-preview-22.0.0.Beta1\\bin\\src\\main\\resources\\')
-}
 
-build.dependsOn(copyDatabase)
 
 test {
     useJUnitPlatform()

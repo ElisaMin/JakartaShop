@@ -10,8 +10,8 @@
         <class>me.heizi.jsp.shopShit.dao.entities.PreOrder</class>
         <class>me.heizi.jsp.shopShit.dao.entities.User</class>
         <properties>
-            <property name="jakarta.persistence.jdbc.url" value="jdbc:sqlite:src/main/resources/theDB.db"/>
-            <property name="jakarta.persistence.jdbc.driver" value="org.sqlite.JDBC"/>
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:h2:mem:default;INIT=runscript from 'src/main/resources/theDB.sql'"/>
+            <property name="jakarta.persistence.jdbc.driver" value="org.h2.Driver"/>
         </properties>
     </persistence-unit>
 </persistence>

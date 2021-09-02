@@ -1,9 +1,11 @@
 -- 用户表
 create table users (
-    id int(4) primary key autoincrement not null ,
+    id int(4) primary key auto_increment not null ,
     name text not null ,
     password text not null ,
-    gender int check ( gender=1 or gender=0 ) default 0,
+    gender int
+--         check ( gender=1 or gender=0 )
+        default 0,
     phone text not null ,
     image text,
     credit int default 0 ,
@@ -13,13 +15,13 @@ create table users (
 );
 -- 商品类型
 create table product_type (
-    id int primary key  autoincrement ,
+    id int primary key  auto_increment ,
     name text not null
 );
 
 -- 商品消息表
 create table products (
-    id int primary key autoincrement ,
+    id int primary key auto_increment ,
     name text not null ,
     price numeric(6,2) not null  default 0,
     quantity int default  0,
@@ -34,7 +36,7 @@ create table products (
 
 -- 购物车
 create table pre_orders(
-    id int primary key autoincrement ,
+    id int primary key auto_increment ,
     user_id int not null ,
     product_id int not null ,
     counts  int default 0,
@@ -44,7 +46,7 @@ create table pre_orders(
 
 -- 订单表
 create table orders(
-    id int primary key autoincrement ,
+    id int primary key auto_increment ,
     user_id int not null ,
     product_id int not null ,
     generate_time datetime not null,

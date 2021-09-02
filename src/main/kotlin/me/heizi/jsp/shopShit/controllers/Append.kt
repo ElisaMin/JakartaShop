@@ -22,8 +22,8 @@ import me.heizi.jsp.shopShit.utils.getFormattedTimeForNow
 @Controller
 @Open class Append {
 
-    @Inject lateinit var model: Models
-    @Inject lateinit var dao: Dao
+    @Inject private lateinit var model: Models
+    @Inject private lateinit var dao: Dao
 
     @GET
     @View("append.jsp")
