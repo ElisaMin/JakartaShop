@@ -15,5 +15,5 @@ import me.heizi.jsp.shopShit.annotations.Open
     @OneToOne
     lateinit var product: Product
 
-    @Column lateinit var name: String
+//    @Column lateinit var name: String
 }

@@ -42,12 +42,11 @@ class DefaultDao:Dao {
     /**验证用户的密码*/
     override fun verifyUser(username: String, password: String): Boolean =useWithResult {
         kotlin.runCatching {
-            createQuery("select count(user) from user where name=:n and password =:p")
+            createQuery("select count(u) from user as u where u.name=:n and u.password =:p",Long::class.java)
                 .setParameter("p",password)
-                .setParameter("u",username)
-                .singleResult as Int
-
-        }.getOrDefault(-1) == 1
+                .setParameter("n",username)
+                .singleResult
+        }.onFailure(::println).getOrDefault(-1L) == 1L
     }
     /**判断是否为管理员*/
     override fun isAdmin(id: Int): Boolean =useWithResult {
@@ -60,17 +59,22 @@ class DefaultDao:Dao {
         }
     }.getOrDefault(false)
 
-    override fun getIdByUsername(username: String): String =useWithResult {
+    override fun getIdByUsername(username: String): Int =useWithResult {
         createQuery("select u.id from user u where u.name = :user ")
             .setParameter("user",username)
-            .singleResult as String
+            .singleResult as Int
     }
     /**通过id获取购物车 单*/
-    override fun getPreOrdersByID(id: Int): List<PreOrder> = useWithResult{
+    override fun getPreOrdersByUserID(id: Int): List<PreOrder> = useWithResult{
         createQuery("select o from preOrders o where o.user.id = :uid",PreOrder::class.java)
             .setParameter("uid",id)
             .resultList
     }
+
+    override fun getPreOrdersByID(id: Int): PreOrder? = useWithResult {
+        find(PreOrder::class.java,id)
+    }
+
     /**提交用户的购物车*/
     override fun submitCart(id: Int) {
         TODO("Not yet implemented")
@@ -80,6 +84,12 @@ class DefaultDao:Dao {
         createQuery("delete from preOrders where id = :id")
             .setParameter("id",id)
             .executeUpdate()
+        Unit
+    }
+
+    /** 更改购物单 */
+    override fun changePreOrder(preOrder: PreOrder) = useWithCommit {
+        persist(preOrder)
     }
 
     override fun getAllTypes(): List<ProductType> =useWithResult {
@@ -104,6 +114,12 @@ class DefaultDao:Dao {
 
     override fun addUser(user: User) = useWithCommit {
         persist(user)
+        user
+    }.let {
+        println("user found:"+useWithResult {
+            find(User::class.java,it.id)
+        })
+
     }
     /** */
 }

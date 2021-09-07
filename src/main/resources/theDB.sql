@@ -28,7 +28,7 @@ create table products (
     sold int default 0,
     image text,
     info text,
-    create_time datetime,
+    create_time varchar,
     isHit int default 0,
     type_id int ,
     foreign key(type_id) references  product_type(id)
@@ -40,6 +40,7 @@ create table pre_orders(
     user_id int not null ,
     product_id int not null ,
     counts  int default 0,
+
     foreign key(product_id) references products(id),
     foreign key (user_id) references users(id)
 );
@@ -56,3 +57,5 @@ create table orders(
     foreign key (user_id) references users(id),
     foreign key (product_id) references products(id)
 );
+insert into users(name, password, phone,isAdmin) VALUES ('admin','admin','12312341234',1  );
+insert into product_type(name) values ( 'default' );

@@ -11,16 +11,19 @@ import jakarta.validation.constraints.NotNull
 import jakarta.ws.rs.*
 import jakarta.ws.rs.core.NewCookie
 import jakarta.ws.rs.core.Response
-import me.heizi.jsp.shopShit.ApplicationScopeParameterSaver
+import me.heizi.jsp.shopShit.LoginChecker
 import me.heizi.jsp.shopShit.R
 import me.heizi.jsp.shopShit.annotations.Open
 import me.heizi.jsp.shopShit.dao.Dao
+import me.heizi.jsp.shopShit.filter.annotations.NotLoginOnly
+import me.heizi.jsp.shopShit.utils.set
 
 @Path("login")
 @Controller
+@NotLoginOnly
 @Open class Login {
 
-    @Inject private lateinit var asps:ApplicationScopeParameterSaver
+    @Inject private lateinit var loginChecker:LoginChecker
 
     /**
      * Blocking
@@ -30,10 +33,7 @@ import me.heizi.jsp.shopShit.dao.Dao
      */
     @GET
     @View("login.jsp")
-    fun blocking(@CookieParam(R.cookie.id) id:String?):Response =
-        if (asps.isUser(id?.toInt())) {  //如果用户存在则阻止本次
-            Response.status(Response.Status.BAD_REQUEST).entity("/").build()//存在
-    } else Response.ok().build()
+    fun blocking(){}
 
 
     class Form {
@@ -64,13 +64,12 @@ import me.heizi.jsp.shopShit.dao.Dao
                 .status(Response.Status.BAD_REQUEST)
                 .build()
         dao.verifyUser(form.name,form.pswd) -> {//密码正确
-            //通知界面
-            model.put("status",1)
-            Response //响应良好并把ID放进用户浏览器
+            model["status"] = 1
+            Response
                 .ok("login.jsp")
-                .cookie(NewCookie( //添加cookie的Id
-                    R.cookie.id,
-                    dao.getIdByUsername(form.name)
+                .cookie(NewCookie(
+                    R.cookie.key,
+                    loginChecker.login(dao.getIdByUsername(form.name)).toString()
                 ))
                 .build()
         }
@@ -79,4 +78,9 @@ import me.heizi.jsp.shopShit.dao.Dao
             Response.status(Response.Status.FORBIDDEN).entity("login.jsp").build()
         }
     }
+    @GET
+    @Path("exit")
+    fun exit(): Response =
+        Response.ok("退出成功").cookie(NewCookie(R.cookie.key,null)).build()
+
 }

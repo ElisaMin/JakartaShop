@@ -10,7 +10,7 @@
         <class>me.heizi.jsp.shopShit.dao.entities.PreOrder</class>
         <class>me.heizi.jsp.shopShit.dao.entities.User</class>
         <properties>
-            <property name="jakarta.persistence.jdbc.url" value="jdbc:h2:mem:default;INIT=runscript from 'src/main/resources/theDB.sql'"/>
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:h2:~/theDB/temp.db;MV_STORE=false;FILE_LOCK=SOCKET;AUTO_SERVER=TRUE"/>
             <property name="jakarta.persistence.jdbc.driver" value="org.h2.Driver"/>
         </properties>
     </persistence-unit>

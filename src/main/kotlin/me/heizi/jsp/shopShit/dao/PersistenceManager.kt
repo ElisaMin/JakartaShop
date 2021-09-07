@@ -7,10 +7,11 @@ import jakarta.persistence.Persistence
 object PersistenceManager {
 
     private val entityManger by lazy {  Persistence.createEntityManagerFactory("default").createEntityManager() }
-    fun useWithCommit(block:EntityManager.()->Unit) {
+    fun <T> useWithCommit(block:EntityManager.()->T):T {
         entityManger.transaction.begin()
-        entityManger.block()
+        val result = entityManger.block()
         entityManger.transaction.commit()
+        return result
     }
     fun <T> useWithResult(block:EntityManager.()->T):T = block(entityManger)
 

@@ -24,13 +24,17 @@ interface Dao {
     /**判断是否为用户*/
     fun isUser(id: Int?):Boolean
     /**获取用户的ID*/
-    fun getIdByUsername(username:String):String
+    fun getIdByUsername(username:String):Int
     /**通过id获取购物车 单*/
-    fun getPreOrdersByID(id: Int):List<PreOrder>
+    fun getPreOrdersByUserID(id: Int):List<PreOrder>
+    /**获取购物车 单*/
+    fun getPreOrdersByID(id: Int):PreOrder?
     /**提交用户的购物车*/
     fun submitCart(id:Int)
     /**删除购物车 单*/
     fun deletePreOrder(id:Int)
+    /**修改购物单*/
+    fun changePreOrder(preOrder: PreOrder)
     /** 获取所有的Type */
     fun getAllTypes():List<ProductType>
     /** 通过ID获取Type */
@@ -42,7 +46,7 @@ interface Dao {
     fun getImageByID(id:Int):Image
     /** 添加商品*/
     fun addProduct(product: Product)
-    /** 添加商品*/
+    /** 添加用户*/
     fun addUser(user: User)
     /** */
 }

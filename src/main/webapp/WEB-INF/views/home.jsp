@@ -72,6 +72,9 @@
                                 <a href="manage" class="nav-link">管理</a>
                             </div>
                         </c:if>
+                        <div class="navbar-nav">
+                            <a href="login/exit" class="nav-link">退出登入</a>
+                        </div>
                     </c:otherwise>
                 </c:choose>
             </div>

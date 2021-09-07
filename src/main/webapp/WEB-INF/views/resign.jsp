@@ -17,6 +17,9 @@
 </head>
 <body>
 <div class="container-lg mt-5">
+  <c:if test="${isGoToHome==true}">
+    <script>setTimeout(()=>{window.location.href="/"},3000)</script>
+  </c:if>
   <c:if test="${responseMessage!=null}">
     <div class="alert alert-success alert-dismissible fade show" role="alert">
       ${responseMessage}
@@ -35,11 +38,10 @@
           <input type="text" class=" col-4 form-control" placeholder="昵称" name="names"  required>
         </div>
         <div class="input-group row mt-3 ">
-          <input type="text" class=" col-4 form-control" placeholder="密码" name="password" id="password" required>
+          <input type="password" class=" col-4 form-control" placeholder="密码" name="password" id="password" required>
         </div>
         <div class="input-group row mt-3">
           <input type="text" class=" col-4 form-control" placeholder="手机" name="phone" id="phone" required>
-          <input type="text" class=" col-2 form-control" placeholder="forTest" name="num" id="shit">
           <div class="col-2">
             <button onclick="return true" class="btn btn-outline-primary" >注册</button>
           </div>

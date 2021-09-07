@@ -38,9 +38,9 @@
             </ul>
         </div>
         <div class="card-body">
-            <form>
+            <form method="post">
                 <div class="mb-3">
-                    <select class="form-select" aria-label="Default select example">
+                    <select class="form-select" aria-label="选择" name="tid">
                         <c:forEach items="${t}" var="type">
                             <option selected value="${type.id}" >${type.name}</option>
                         </c:forEach>

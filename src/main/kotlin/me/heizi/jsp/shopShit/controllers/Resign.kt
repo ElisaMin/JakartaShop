@@ -13,6 +13,8 @@ import jakarta.ws.rs.Path
 import me.heizi.jsp.shopShit.annotations.Open
 import me.heizi.jsp.shopShit.dao.Dao
 import me.heizi.jsp.shopShit.dao.entities.User
+import me.heizi.jsp.shopShit.filter.annotations.NotLoginOnly
+import me.heizi.jsp.shopShit.utils.set
 
 @Path("resign")
 @Controller
@@ -22,6 +24,7 @@ import me.heizi.jsp.shopShit.dao.entities.User
 //    }
 
     @View("resign.jsp")
+    @NotLoginOnly
     @GET fun page(){}
 
    @Inject private lateinit var dao: Dao
@@ -36,17 +39,47 @@ import me.heizi.jsp.shopShit.dao.entities.User
         @NotNull @Valid phone:String,
         @FormParam("password")
         @NotNull @Valid password:String,
-        @FormParam("forTest")
-        @Valid forTest:String?,
     ) {
         User().apply {
             name = names
             this.phone = phone
             this.password = password
-            this._isAdmin = if (forTest == "admin") 1 else 0
+            this._isAdmin = 0
+            println(this)
         }.let(dao::addUser)
+        module.put("isGoToHome",true)
         module.put("responseMessage","""|注册成功！！！！！
-            |<script>document.querySelectorAll("input").forEach((i)=>{i.disabled = true})</script>
         """.trimMargin())
     }
+
+
+    @View("resign.jsp")
+    @NotLoginOnly
+    @Path("admin")
+    @GET fun admin(){}
+    @POST
+    @Path("admin")
+    @View("resign.jsp")
+    fun resignAdmin(
+        @FormParam("names")
+        @NotNull @Valid names:String,
+        @FormParam("phone")
+        @NotNull @Valid phone:String,
+        @FormParam("password")
+        @NotNull @Valid password:String,
+    ) {
+        User().apply {
+            name = names
+            this.phone = phone
+            this.password = password
+            this._isAdmin = 1
+            println(this)
+        }.let(dao::addUser)
+
+        module.put("isGoToHome",true)
+        module["responseMessage"]=
+            """|注册成功！！！！！
+        """.trimMargin()
+    }
+
 }
