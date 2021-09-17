@@ -30,6 +30,7 @@ create table products (
     info text,
     create_time varchar,
     isHit int default 0,
+    is_using int default 1,
     type_id int ,
     foreign key(type_id) references  product_type(id)
 );

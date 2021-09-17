@@ -4,11 +4,11 @@
              xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd"
              version="3.0">
     <persistence-unit name="default">
-        <class>me.heizi.jsp.shopShit.dao.entities.Product</class>
-        <class>me.heizi.jsp.shopShit.dao.entities.ProductType</class>
-        <class>me.heizi.jsp.shopShit.dao.entities.Order</class>
-        <class>me.heizi.jsp.shopShit.dao.entities.PreOrder</class>
-        <class>me.heizi.jsp.shopShit.dao.entities.User</class>
+        <class>me.heizi.jsp.shop.entities.Product</class>
+        <class>me.heizi.jsp.shop.entities.ProductType</class>
+        <class>me.heizi.jsp.shop.entities.Order</class>
+        <class>me.heizi.jsp.shop.entities.PreOrder</class>
+        <class>me.heizi.jsp.shop.entities.User</class>
         <properties>
             <property name="jakarta.persistence.jdbc.url" value="jdbc:h2:~/theDB/temp.db;MV_STORE=false;FILE_LOCK=SOCKET;AUTO_SERVER=TRUE"/>
             <property name="jakarta.persistence.jdbc.driver" value="org.h2.Driver"/>

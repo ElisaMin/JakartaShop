@@ -1,11 +1,10 @@
 <%@ page import="java.util.Arrays" %>
 <%@ page import="java.util.function.Predicate" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="me.heizi.jsp.shopShit.utils.FindCookieKt" %>
-<%@ page import="me.heizi.jsp.shopShit.R" %>
+<%@ page import="me.heizi.jsp.shop.utils.FindCookieKt" %>
+<%@ page import="me.heizi.jsp.shop.R" %>
 <%@ page import="jakarta.servlet.http.Cookie" %>
 <%@ page import="jakarta.inject.Inject" %>
-<%@ page import="me.heizi.jsp.shopShit.dao.Dao" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
@@ -69,7 +68,7 @@
                         </div>
                         <c:if test="${isAdmin}">
                             <div class="navbar-nav">
-                                <a href="manage" class="nav-link">管理</a>
+                                <a href="managing/" class="nav-link">管理</a>
                             </div>
                         </c:if>
                         <div class="navbar-nav">
@@ -117,7 +116,7 @@
         <div class="row mt-3 d-flex row-overflow ">
             <%--@elvariable id="list" type="java.util.List"--%>
             <c:forEach items="${list}" var="p">
-                <div class="card card-item mx-1" onclick="goto(${p.id})">
+                <div class="card card-item mx-1 mb-1 " onclick="goto(${p.id})">
                     <div class="card-img bg-success">
 
                     </div>
@@ -135,7 +134,7 @@
                         </div>
                         <div class="row text-secondary mt-2">
                             <div class="badge bg-primary fit-width me-1 ">● 月销 ${p.sold}</div>
-                            <div class="badge bg-primary fit-width ">● 钦州</div>
+                            <div class="badge bg-primary fit-width ">● ${p.city}</div>
                             <c:if test="${p.hit==1}">
                                 <div class="badge bg-danger fit-width ">● 火!</div>
                             </c:if>
@@ -151,7 +150,7 @@
 <script src="js/bootstrap.min.js"></script>
 <script>
     function goto(id) {
-        window.location.href="info?id="+id;
+        window.location.href+=("info/"+id);
     }
 </script>
 </body>

@@ -7,6 +7,10 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<c:choose>
+<c:when test="${success==true}"><script>alert("添加成功");window.location.back()</script></c:when>
+<c:when test="${success==false}"><script>alert("添加失败:");</script></c:when>
+<c:otherwise>
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>
@@ -38,7 +42,7 @@
             </ul>
         </div>
         <div class="card-body">
-            <form method="post">
+            <form method="post" accept-charset="UTF-8">
                 <div class="mb-3">
                     <select class="form-select" aria-label="选择" name="tid">
                         <c:forEach items="${t}" var="type">
@@ -54,7 +58,7 @@
                         <input type="number" name="prc" class="form-control "  placeholder="价格">
                     </div>
                     <div class="col-3">
-                        <input type="text" class="form-control "  placeholder="发货地">
+                        <input type="text" class="form-control " name="cti"  placeholder="发货地">
                     </div>
                     <div class="col input-group">
                         <span class="input-group-text">商品图片</span>
@@ -76,3 +80,4 @@
 
 </body>
 </html>
+</c:otherwise></c:choose>

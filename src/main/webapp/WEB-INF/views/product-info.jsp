@@ -1,6 +1,6 @@
-<%@ page import="me.heizi.jsp.shopShit.utils.FindCookieKt" %>
-<%@ page import="me.heizi.jsp.shopShit.R" %>
-<%--@elvariable id="p" type="me.heizi.jsp.shopShit.dao.entities.Product"--%>
+<%@ page import="me.heizi.jsp.shop.utils.FindCookieKt" %>
+<%@ page import="me.heizi.jsp.shop.R" %>
+<%--@elvariable id="p" type="me.heizi.jsp.shop.entities.Product"--%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
@@ -15,7 +15,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
     <title>商品详细</title>
 </head>
 <body class="bg-light">
@@ -30,14 +30,17 @@
     </c:if>
     <div class="row p-0">
         <div class="col-7">
-            <div class="row mt-2">
-                <img src="img/${p.image}" class="w-100" alt="商品详细图">
-            </div>
-            <div class="row mt-2">
-                <h6 class="text-secondary">商品描述:</h6>
-            </div>
-            <div class="row mt-2">
-                ${p.info}
+
+            <div class="container">
+                <div class="row mt-2">
+<%--                    <img src="img/${p.image}" class="w-100" alt="商品详细图">--%>
+                </div>
+                <div class="row mt-2">
+                    <h6 class="text-secondary">商品描述:</h6>
+                </div>
+                <div class="row mt-2">
+                    ${p.info}
+                </div>
             </div>
         </div>
         <div class="col bg-white p-3 pt-5">
@@ -51,7 +54,7 @@
                 <h6 class="text-secondary">发货地点:</h6>
             </div>
             <div class="row mx-3">
-                南宁
+                ${p.city}
             </div>
             <div class="row mt-4">
                 <h6 class="text-secondary">上架时间:</h6>
@@ -73,8 +76,11 @@
             </div>
 
             <c:choose>
+                <c:when test="${p.using == 0}">
+                    <button class="mx-1 mt-5 row w-100 btn btn-outline-danger">不可使用</button>
+                </c:when>
                 <c:when test="${isLogin!=true && isAddedToCart==null }">
-                    <button class="mx-1 mt-5 row w-100 btn btn-outline-primary">登入</button>
+                    <a href="../login"> <button class="mx-1 mt-5 row w-100 btn btn-outline-primary">登入</button></a>
                 </c:when>
                 <c:when test="${isLogin || isAddedToCart}">
                     <form method="post">

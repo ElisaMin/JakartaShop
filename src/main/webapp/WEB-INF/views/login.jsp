@@ -58,7 +58,7 @@
                 <div class="row mb-3" >
                     <div class="alert alert-success alert-dismissible fade show" role="alert">成功!
                         <script>
-                            setTimeout(()=>{window.location.href="/"},3000)
+                            setTimeout(()=>{window.history.back()},1000)
                         </script>
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
