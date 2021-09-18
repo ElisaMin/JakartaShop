@@ -21,7 +21,7 @@
 <body>
 <div class="container-lg mt-5">
   <c:if test="${isGoToHome==true}">
-    <script>setTimeout(()=>{window.location.href="/"},3000)</script>
+    <script>setTimeout(()=>{window.history.back()},500)</script>
   </c:if>
   <c:if test="${responseMessage!=null}">
     <div class="alert alert-success alert-dismissible fade show" role="alert">

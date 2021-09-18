@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: Heizi
@@ -11,8 +12,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/bootstrap.min.css">
-    <link rel="stylesheet" href="../css/bootstrap-x.css">
+    <link rel="stylesheet" href="../../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../css/bootstrap-x.css">
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.6.0.min.js"></script>
     <title>购物车</title>
 </head>
 <body class="bg-dark">
@@ -38,6 +40,40 @@
             </ul>
         </div>
         <div class="card-body">
+            <small>离开输入即可修改参数</small>
+            <script>
+
+                function showResult(result, msgBf){
+                    alert((msgBf ? msgBf : "执行") + (result.status == 200 ? "成功" : "失败"))
+                }
+                function inputFocusOut(self) {
+                    let data = {};
+                    data["pid"] = getPid(self)
+                    data[self.name] = self.value
+                    console.log(data)
+
+                    $.ajax("",{
+                        method:"PUT",
+                        contentType:"text/html;charset=UTF-8",
+                        data:data
+                    }).done((msg,another,resp)=>{
+                        showResult(resp)
+                    })
+                }
+                function getPid(inner) {return inner.parentElement.parentElement.attributes["p"].value;}
+                document.querySelectorAll("tr>*>input ").forEach(self=>{
+                    // self.attributes.onfocusout =
+                })
+                document.querySelectorAll("tr[p]>*>button").forEach((self)=>{
+                    self.onclick=()=>{
+                        $.ajax("",{method: "DELETE",contentType:"text/html;charset=UTF-8",data:{id:getPid(self)}}).done((msg,another,resp)=>{
+                            showResult(resp,"删除")
+                            window.location.reload()
+                        })
+                    }
+                    getPid(self)
+                })
+            </script>
             <table class="table table-hover table-striped m-0">
                 <thead class="bg-light">
                 <tr>
@@ -48,16 +84,31 @@
                 </tr>
                 </thead>
                 <tbody>
-
-                <tr>
-                    <th scope="row"></th>
-                    <td>蟑螂奶 环保 新品</td>
-                    <td>16.00</td>
-                    <td><input style="width: 3rem;" value="1" type="number"></td>
-                    <td><button type="button" class="btn btn-link">删除</button></td>
-                </tr>
+                <%--@elvariable id="products" type="java.util.List"--%>
+                <%--@elvariable id="p" type="me.heizi.jsp.shop.entities.Product"--%>
+                <c:forEach items="${products}" var="p" >
+                    <tr p="${p.id}">
+                        <th scope="row"></th>
+                        <td>${p.name}</td>
+                        <td><input value="${p.price}" type="number" name="prc" onfocusout="inputFocusOut(this)"></td>
+                        <td><input style="width: 3rem;" value="${p.quantity}" type="number" name="qtt" onfocusout="inputFocusOut(this)"  ></td>
+                        <td><button type="button" class="btn btn-link">删除</button></td>
+                    </tr>
+                </c:forEach>
                 </tbody>
             </table>
+        </div>
+        <div class="card-footer" >
+            <script>
+                let n = window.location.href.split("/")
+                const path = n[n.length-1]
+                n=void 0
+                function step(isNext) {
+                    window.location.href = isNext? n+1 : n-1
+                }
+            </script>
+            <button class="btn btn-outline-secondary" onclick="step(true)">下一页</button>
+            <button class="btn btn-outline-secondary" onclick="step(false)">下一页</button>
         </div>
     </div>
 </div>

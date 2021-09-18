@@ -115,6 +115,7 @@
         </div>
         <div class="row mt-3 d-flex row-overflow ">
             <%--@elvariable id="list" type="java.util.List"--%>
+            <%--@elvariable id="p" type="me.heizi.jsp.shop.entities.Product"--%>
             <c:forEach items="${list}" var="p">
                 <div class="card card-item mx-1 mb-1 " onclick="goto(${p.id})">
                     <div class="card-img bg-success">
