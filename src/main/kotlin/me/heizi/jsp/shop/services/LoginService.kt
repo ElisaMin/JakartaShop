@@ -45,4 +45,8 @@ class LoginService {
         return key
     }
 
+    operator fun set(key:Int,id:Int) {
+        login[key] = id
+    }
+
 }
