@@ -44,35 +44,29 @@
             <script>
 
                 function showResult(result, msgBf){
-                    alert((msgBf ? msgBf : "执行") + (result.status == 200 ? "成功" : "失败"))
+                    alert((msgBf ? msgBf : "执行") + (result.status == 200 ? "成功" : "失败")+"\n" +
+                        "原因:"+result.responseText)
+                }
+                function getPid(inner) {return inner.parentElement.parentElement.attributes["p"].value;}
+                function onDelete(self){
+                    $.ajax("",{method: "DELETE",data:{id:getPid(self)},complete(resp){
+                            showResult(resp,"删除")
+                            window.location.reload()
+                        }})
                 }
                 function inputFocusOut(self) {
                     let data = {};
                     data["pid"] = getPid(self)
                     data[self.name] = self.value
-                    console.log(data)
-
                     $.ajax("",{
                         method:"PUT",
-                        contentType:"text/html;charset=UTF-8",
-                        data:data
-                    }).done((msg,another,resp)=>{
-                        showResult(resp)
+                        data:data,
+                        complete:showResult
                     })
+
                 }
-                function getPid(inner) {return inner.parentElement.parentElement.attributes["p"].value;}
-                document.querySelectorAll("tr>*>input ").forEach(self=>{
-                    // self.attributes.onfocusout =
-                })
-                document.querySelectorAll("tr[p]>*>button").forEach((self)=>{
-                    self.onclick=()=>{
-                        $.ajax("",{method: "DELETE",contentType:"text/html;charset=UTF-8",data:{id:getPid(self)}}).done((msg,another,resp)=>{
-                            showResult(resp,"删除")
-                            window.location.reload()
-                        })
-                    }
-                    getPid(self)
-                })
+            </script>
+            <script>
             </script>
             <table class="table table-hover table-striped m-0">
                 <thead class="bg-light">
@@ -92,7 +86,7 @@
                         <td>${p.name}</td>
                         <td><input value="${p.price}" type="number" name="prc" onfocusout="inputFocusOut(this)"></td>
                         <td><input style="width: 3rem;" value="${p.quantity}" type="number" name="qtt" onfocusout="inputFocusOut(this)"  ></td>
-                        <td><button type="button" class="btn btn-link">删除</button></td>
+                        <td><button type="button" class="btn btn-link" onclick="onDelete(this)">删除</button></td>
                     </tr>
                 </c:forEach>
                 </tbody>
