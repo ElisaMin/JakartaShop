@@ -1,0 +1,50 @@
+@startmindmap
+'https://plantuml.com/mindmap-diagram
+
+
+title 关于Order的一切
+
+* order
+** 可能需要添加的功能
+*** 完成订单
+**** SQL_DONE
+**** HTML_DONE
+*** 筛选未完的订单
+**** 非必要性
+
+** 一定需要实现的功能
+*** 订单子项
+**** SQL_DONE
+**** HTML_DONE
+
+** HTML to JSP
+*** 订单的价格合算
+**** 后端实现_DONE
+*** 删除主订单
+**** DONE
+*** 子订单数量
+**** DONE
+
+** 后端接口实现(RESTFul)
+*** GET order/{page}
+**** DONE
+*** DELETE order/order/{id}
+**** DONE
+*** DELETE order/sub/{id}
+**** DONE
+*** PUT order/sub/{id} body:amount
+**** DONE
+*** PUT order/done/{id}
+**** DONE
+
+** JavaScript实现
+*** onDeleteBtnClicked
+**** DONE
+*** onDoneBtnClicked
+**** DONE
+*** onAmountIptFocusOut
+**** DONE
+** 测试
+*** 所有未完成!!!!!!!
+**** TODO
+@endmindmap

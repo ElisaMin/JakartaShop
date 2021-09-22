@@ -20,7 +20,7 @@
                 <div class="row">
                     <button class="btn btn-outline-warning mb-2" href="user" >用户管理</button>
                     <button class="btn btn-outline-success mb-2" href="append" >添加商品</button>
-                    <button class="btn btn-outline-success mb-2" href="product" >管理商品</button>
+                    <button class="btn btn-outline-success mb-2" href="product/1" >管理商品</button>
                     <button class="btn btn-outline-info mb-2" href="order" >订单管理</button>
                 </div>
             </div>

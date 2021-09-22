@@ -22,25 +22,7 @@
 <body class="bg-dark">
 <div class="container-lg mt-5">
     <div class="card">
-        <div class="card-title bg-light">
-            <ul class="nav nav-tabs">
-                <li class="nav-item">
-                    <a href="" class="nav-link">主页</a>
-                </li>
-                <li class="nav-item">
-                    <a href="" class="nav-link">用户管理</a>
-                </li>
-                <li class="nav-item">
-                    <a href="" class="nav-link active">商品添加</a>
-                </li>
-                <li class="nav-item">
-                    <a href="" class="nav-link">商品管理</a>
-                </li>
-                <li class="nav-item">
-                    <a href="" class="nav-link">订单管理</a>
-                </li>
-            </ul>
-        </div>
+        <%@include file="admin-card-header.jsp"%>
         <div class="card-body">
             <form method="post" accept-charset="UTF-8">
                 <div class="mb-3">

@@ -9,10 +9,11 @@ import jakarta.mvc.View
 import jakarta.ws.rs.*
 import jakarta.ws.rs.core.Response
 import me.heizi.jsp.shop.dao.ProductDao
+import me.heizi.jsp.shop.filter.annotations.AdminOnly
 import me.heizi.jsp.shop.utils.set
 
 @Path("/managing/product/{page}")
-//@AdminOnly
+@AdminOnly
 @Controller
 @Suppress("NAME_SHADOWING")
 class ProductManaging {

@@ -13,7 +13,7 @@ import me.heizi.jsp.shop.services.LoginService
 
 @Path("/fastLogin/{id}")
 @Controller
-@Deprecated("正式上线时就别用了!!!")
+@Deprecated("正式上线时就别用了!!!(这辈子都不可能正常上线的")
 class LoginAdminForTest {
     @Inject private lateinit var login:LoginService
     @GET

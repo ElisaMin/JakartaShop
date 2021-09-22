@@ -8,7 +8,7 @@ interface ProductDao {
     /**
      * 分页获取商品信息
      *
-     * @param page 分页 1为初始页 >=0
+     * @param page 分页 1为初始页 >0
      * @return 可空列表
      */
     fun getByPaged(page:Int):List<Product>

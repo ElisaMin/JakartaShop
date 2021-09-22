@@ -41,22 +41,31 @@ create table pre_orders(
     user_id int not null ,
     product_id int not null ,
     counts  int default 0,
-
     foreign key(product_id) references products(id),
     foreign key (user_id) references users(id)
 );
+-- 子订单
+-- auto-generated definition
+create table SUB_ORDERS (
+    ID         INT auto_increment primary key ,
+    ORDER_ID   INT,
+    PRODUCT_ID INT not null,
+    AMOUNT     INT default 0,
+    foreign key (ORDER_ID) references ORDERS (ID),
+    foreign key (PRODUCT_ID) references PRODUCTS (ID)
+);
+
 
 -- 订单表
 create table orders(
     id int primary key auto_increment ,
-    user_id int not null ,
-    product_id int not null ,
+    user_id int not null,
     generate_time datetime not null,
-    amount int not null default 0, -- 数量
     comment text, -- 评论
     comment_generate_time datetime,
-    foreign key (user_id) references users(id),
-    foreign key (product_id) references products(id)
+    done_yet int default 0,
+    foreign key (user_id) references users(id)
 );
+
 insert into users(name, password, phone,isAdmin) VALUES ('admin','admin','12312341234',1  );
 insert into product_type(name) values ( 'default' );

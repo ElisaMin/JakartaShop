@@ -1,21 +1,28 @@
 package me.heizi.jsp.shop.entities
 
 import jakarta.persistence.*
-import me.heizi.jsp.shop.annotations.Open
 
 @Entity
 @Table(name = "orders")
-@Open data class Order(
+data class Order(
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Int = 0,
-    @Column var amount: Int =  0
+    @Column var comment:String? = null,
+    @Column(name = "comment_generate_time") var commentTime:String? =null,
+    @Column(name = "done_yet") var doneYet: Int = 0
 ) {
-    @Column(name = "generate_time") lateinit var time:String
-    @Column(name = "comment") lateinit var comment:String
-    @Column(name = "comment_generate_time") lateinit var timeComment:String
-    @OneToOne
-    lateinit var user: User
-    @OneToOne
-    lateinit var product: Product
 
+    @Column(name = "generate_time") lateinit var time:String
+    var isDone:Boolean;get() = doneYet == 1 ;set(isDoneYet) { doneYet = if (isDoneYet) 1 else 0 }
+
+    @OneToOne lateinit var user: User
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "order_id")
+    lateinit var subOrders:MutableSet<SubOrder>
+
+    val price get() = subOrders.let {
+        var count = 0.0
+        subOrders.forEach { count+=it.price }
+        count
+    }
 }
