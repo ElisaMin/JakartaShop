@@ -42,6 +42,8 @@ import me.heizi.jsp.shop.annotations.Open
     lateinit var registerTime:String
 
 
+
+
     val isAdmin get() = _isAdmin==1
     var isMale
         get() = _isAdmin==1

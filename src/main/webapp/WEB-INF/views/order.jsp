@@ -52,7 +52,10 @@
                         send("sub/"+getOid(self),"PUT",data)
                     }
                 </script>
+                <%--@elvariable id="orders" type="java.util.List"--%>
+                <%--@elvariable id="order" type="me.heizi.jsp.shop.entities.Order"--%>
                 <c:forEach var="order" items="${orders}">
+
                     <tr oid="${order.id}" s="0">
                         <th scope="row">${order.id}</th>
                         <td>订单</td>
@@ -60,7 +63,7 @@
                         <td></td>
                         <td>${order.price}</td>
                         <td><c:choose>
-                            <c:when test="${order.isDone}"><button type="button" class="btn btn-link mx-1">删除</button>|<button type="button" class="btn btn-link mx-1" >完成</button></c:when>
+                            <c:when test="${order.done}"><button type="button" class="btn btn-link mx-1">删除</button>|<button type="button" class="btn btn-link mx-1" >完成</button></c:when>
                             <c:otherwise>订单已完成</c:otherwise>
                         </c:choose></td>
                     </tr>

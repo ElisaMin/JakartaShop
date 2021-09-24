@@ -5,7 +5,7 @@ import java.util.*
 
 //获取现在时间
 fun getFormattedTimeForNow() = Date().format()
-val nowFormatted = Date().format()
+val nowFormatted get()  = Date().format()
 
 fun main() {
     println(getFormattedTimeForNow())

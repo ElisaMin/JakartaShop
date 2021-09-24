@@ -8,6 +8,7 @@
         <class>me.heizi.jsp.shop.entities.ProductType</class>
         <class>me.heizi.jsp.shop.entities.Order</class>
         <class>me.heizi.jsp.shop.entities.PreOrder</class>
+        <class>me.heizi.jsp.shop.entities.SubOrder</class>
         <class>me.heizi.jsp.shop.entities.User</class>
         <properties>
             <property name="jakarta.persistence.jdbc.url" value="jdbc:h2:~/theDB/temp.db;MV_STORE=false;FILE_LOCK=SOCKET;AUTO_SERVER=TRUE"/>

@@ -7,4 +7,5 @@
 # 基于编辑器的 HTTP 客户端请求
 /httpRequests/
 
-./dataSources
+./dataSources/
+./dataSources/*

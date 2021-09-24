@@ -43,7 +43,7 @@
                     <td><input onfocusout="put(this.value,${p.id},${p.product.price});" style="width: 3rem;" value="1" type="number"></td>
                     <td><a id="count"></a>></td>
                     <td>
-                        <form>
+                        <form  >
                             <input type="hidden" name="_method" value="DELETE">
                             <button name="id" value="${p.id}" type="submit" class="btn btn-link">删除</button>
                         </form>
@@ -57,7 +57,7 @@
             <div class="col-2">
                 一共: <a id="sum"></a>
             </div>
-            <div class="col-2"><button type="button" class="btn btn-outline-primary">下单</button></div>
+            <div class="col-2"><form method="post"><button type="submit" class="btn btn-outline-primary">下单</button></form></div>
         </div>
     </div>
 </div>

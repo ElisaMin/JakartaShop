@@ -3,6 +3,7 @@ package me.heizi.jsp.shop.controllers.managing
 import jakarta.inject.Inject
 import jakarta.mvc.Controller
 import jakarta.mvc.Models
+import jakarta.mvc.View
 import jakarta.ws.rs.*
 import jakarta.ws.rs.core.Response
 import me.heizi.jsp.shop.dao.OrderDao
@@ -16,14 +17,17 @@ class ManagingOrder {
 
 
     @GET
-    fun emptyGet() = Response.ok().entity("页数为空").build()
-    @Inject lateinit var model: Models
-    @Inject lateinit var orders:OrderDao
+    fun emptyGet() = Response.ok().build()
+    @Inject private lateinit var model: Models
+    @Inject private lateinit var orders:OrderDao
 
     @GET
+    @View("order.jsp")
     @Path("/{page}")
     fun getByPage(@PathParam("page") page:Int){
-        model["orders"] = orders.getByPage(page)
+        val list = orders.getByPage(page)
+        model["orders"] = list
+        println(list.joinToString { it.toString() })
     }
 
     fun <T> checkNotExistOrKeep(id:Int?,block:(Order)->T):T {

@@ -5,7 +5,9 @@ import me.heizi.jsp.shop.dao.PersistenceManager
 import me.heizi.jsp.shop.dao.PersistenceManager.useWithCommit
 import me.heizi.jsp.shop.dao.PersistenceManager.useWithResult
 import me.heizi.jsp.shop.entities.*
+import me.heizi.jsp.shop.utils.format
 import me.heizi.jsp.shop.utils.nowFormatted
+import java.util.*
 
 /**
  * [OrderDao]
@@ -14,7 +16,7 @@ class OrderDaoImpl: OrderDao {
 
     /**  添加到购物车*/
     override fun addToCart(productID: Int, userID: Int) {
-        PersistenceManager.useWithCommit {
+        useWithCommit {
             persist(
                 PreOrder().apply {
                     count = 1
@@ -30,7 +32,7 @@ class OrderDaoImpl: OrderDao {
     }
 
     override fun getByPage(page: Int): List<Order> = useWithResult {
-        createNativeQuery("select * from orders order by id limit ?,? ",Product::class.java).apply {
+        createNativeQuery("select * from orders order by id limit ?,? ",Order::class.java).apply {
             setParameter(1,(page-1)*10)
             setParameter(2,page*10)
         }.resultList as List<Order>? ?: emptyList()
@@ -66,30 +68,40 @@ class OrderDaoImpl: OrderDao {
 
     /**提交用户的购物车*/
     override fun submitCart(userID: Int) {
-        val time = nowFormatted
+        val time = Date()
+        val nowFormatted = time.format()
+
         //create new order
         val orderId = useWithCommit {
-            createNativeQuery(
-                "insert into ORDERS(USER_ID,GENERATE_TIME) values ( ?,? )"
-            ).run {
-                setParameter(1,userID)
-                setParameter(2, nowFormatted)
+//            Order(
+//                time=time
+//            ).apply {
+//                user = find(User::class.java, userID)
+//            }.let(this::persist)
+            createNativeQuery("insert into ORDERS(GENERATE_TIME,USER_ID) values ( ?,?)").run {
+                setParameter(1,time)
+                setParameter(2,userID)
                 executeUpdate()
             }
-            createNativeQuery("select id from ORDERS where GENERATE_TIME = :gen",Int::class.java).run {
-                setParameter("gen", nowFormatted)
-                singleResult as Int
+            val orderId = createNativeQuery("select id from ORDERS where GENERATE_TIME = ?").run {
+                setParameter(1, time)
+                (singleResult as Number).toInt()
             }
-        }
-        //preorder to suborder
-        useWithResult {
-            createNativeQuery("insert into SUB_ORDERS(order_id, product_id, amount) SELECT :orderID,PRODUCT_ID,COUNTS from PRE_ORDERS").run {
-                setParameter("orderID",orderId)
+            //preorder to suborder
+            createNativeQuery("insert into SUB_ORDERS(order_id, product_id, amount) SELECT ?,PRODUCT_ID,COUNTS from PRE_ORDERS").run {
+                setParameter(1,orderId)
                 executeUpdate()
+            }.let {
+                if (it<=0) throw IllegalStateException()
+                else {
+
+                }
             }
-        }.let {
-            if (it<=0) throw IllegalStateException()
         }
+
+//        useWithResult {
+//
+//        }
     }
 
     /**通过id获取购物车 单*/
